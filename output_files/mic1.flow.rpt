@@ -1,6 +1,6 @@
 Flow report for mic1
-Thu Jun 12 17:32:02 2025
-Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Mon Dec 01 08:57:06 2025
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -40,21 +40,21 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu Jun 12 17:32:02 2025           ;
-; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Flow Status                        ; Successful - Mon Dec 01 08:57:06 2025           ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; mic1                                            ;
-; Top-level Entity Name              ; register_32bit                                  ;
-; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 97 / 14,448 ( < 1 % )                           ;
-;     Total combinational functions  ; 97 / 14,448 ( < 1 % )                           ;
-;     Dedicated logic registers      ; 32 / 14,448 ( < 1 % )                           ;
-; Total registers                    ; 32                                              ;
-; Total pins                         ; 166 / 315 ( 53 % )                              ;
+; Top-level Entity Name              ; CPU                                             ;
+; Family                             ; Cyclone III                                     ;
+; Total logic elements               ; 307 / 15,408 ( 2 % )                            ;
+;     Total combinational functions  ; 302 / 15,408 ( 2 % )                            ;
+;     Dedicated logic registers      ; 49 / 15,408 ( < 1 % )                           ;
+; Total registers                    ; 49                                              ;
+; Total pins                         ; 224 / 347 ( 65 % )                              ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0 / 239,616 ( 0 % )                             ;
-; Embedded Multiplier 9-bit elements ; 0 / 52 ( 0 % )                                  ;
+; Total memory bits                  ; 18,432 / 516,096 ( 4 % )                        ;
+; Embedded Multiplier 9-bit elements ; 0 / 112 ( 0 % )                                 ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
-; Device                             ; EP2C15AF484C6                                   ;
+; Device                             ; EP3C16F484C6                                    ;
 ; Timing Models                      ; Final                                           ;
 +------------------------------------+-------------------------------------------------+
 
@@ -64,28 +64,36 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/12/2025 17:19:25 ;
+; Start date & time ; 12/01/2025 08:54:24 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; mic1                ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                       ;
-+-------------------------------------+--------------------------------+---------------+----------------+----------------+
-; Assignment Name                     ; Value                          ; Default Value ; Entity Name    ; Section Id     ;
-+-------------------------------------+--------------------------------+---------------+----------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 27116745733476.174975956506724 ; --            ; --             ; --             ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; On                             ; --            ; --             ; eda_simulation ;
-; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                    ; --            ; --             ; eda_simulation ;
-; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)      ; <None>        ; --             ; --             ;
-; EDA_TIME_SCALE                      ; 1 ps                           ; --            ; --             ; eda_simulation ;
-; PARTITION_COLOR                     ; 16764057                       ; --            ; register_32bit ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING          ; --            ; register_32bit ; Top            ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                         ; --            ; register_32bit ; Top            ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                   ; --            ; --             ; --             ;
-; TOP_LEVEL_ENTITY                    ; register_32bit                 ; mic1          ; --             ; --             ;
-+-------------------------------------+--------------------------------+---------------+----------------+----------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                     ;
++-------------------------------------+---------------------------------+---------------+-------------+----------------+
+; Assignment Name                     ; Value                           ; Default Value ; Entity Name ; Section Id     ;
++-------------------------------------+---------------------------------+---------------+-------------+----------------+
+; COMPILER_SIGNATURE_ID               ; 229335799379801.176459006410160 ; --            ; --          ; --             ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                             ; --            ; --          ; eda_simulation ;
+; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                     ; --            ; --          ; eda_simulation ;
+; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)       ; <None>        ; --          ; --             ;
+; EDA_TIME_SCALE                      ; 1 ps                            ; --            ; --          ; eda_simulation ;
+; IP_TOOL_NAME                        ; LPM_MUX                         ; --            ; --          ; --             ;
+; IP_TOOL_NAME                        ; ROM: 1-PORT                     ; --            ; --          ; --             ;
+; IP_TOOL_VERSION                     ; 13.0                            ; --            ; --          ; --             ;
+; IP_TOOL_VERSION                     ; 13.0                            ; --            ; --          ; --             ;
+; MISC_FILE                           ; lpm_mux0.bsf                    ; --            ; --          ; --             ;
+; MISC_FILE                           ; lpm_mux0.cmp                    ; --            ; --          ; --             ;
+; MISC_FILE                           ; Microprogam_Memory.bsf          ; --            ; --          ; --             ;
+; MISC_FILE                           ; Microprogam_Memory.cmp          ; --            ; --          ; --             ;
+; PARTITION_COLOR                     ; 16764057                        ; --            ; CPU         ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING           ; --            ; CPU         ; Top            ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                          ; --            ; CPU         ; Top            ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                    ; --            ; --          ; --             ;
+; TOP_LEVEL_ENTITY                    ; CPU                             ; mic1          ; --          ; --             ;
++-------------------------------------+---------------------------------+---------------+-------------+----------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -93,25 +101,14 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:04     ; 1.0                     ; 4577 MB             ; 00:00:01                           ;
-; Fitter                    ; 00:00:09     ; 1.0                     ; 4845 MB             ; 00:00:05                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 4553 MB             ; 00:00:01                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 4540 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4507 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4515 MB             ; 00:00:01                           ;
-; Total                     ; 00:00:25     ; --                      ; --                  ; 00:00:22                           ;
+; Analysis & Synthesis      ; 00:00:04     ; 1.0                     ; 398 MB              ; 00:00:04                           ;
+; Fitter                    ; 00:00:12     ; 1.0                     ; 553 MB              ; 00:00:12                           ;
+; Assembler                 ; 00:00:01     ; 1.0                     ; 355 MB              ; 00:00:01                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 381 MB              ; 00:00:03                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 325 MB              ; 00:00:01                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 330 MB              ; 00:00:01                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 333 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:23     ; --                      ; --                  ; 00:00:23                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -120,24 +117,13 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; Fitter                    ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; Assembler                 ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; TimeQuest Timing Analyzer ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
-; EDA Netlist Writer        ; DECOMDV-304-012  ; Windows 7 ; 6.2        ; x86_64         ;
+; Analysis & Synthesis      ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
+; EDA Netlist Writer        ; PC-db3759        ; Windows 7 ; 6.2        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 
@@ -149,18 +135,7 @@ quartus_fit --read_settings_files=off --write_settings_files=off mic1 -c mic1
 quartus_asm --read_settings_files=off --write_settings_files=off mic1 -c mic1
 quartus_sta mic1 -c mic1
 quartus_eda --read_settings_files=off --write_settings_files=off mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/Waveform.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
-quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
-quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source=C:/Users/Aluno/Vinicius/ProjetoMic/REGISTER32bit.vwf --testbench_file=./simulation/qsim/mic1.vt
+quartus_eda --gen_testbench --check_outputs=on --tool=modelsim_oem --format=verilog mic1 -c mic1 --vector_source="C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/CPU_wide_istore.vwf" --testbench_file=./simulation/qsim/mic1.vt
 quartus_eda --functional=on --simulation=on --tool=modelsim_oem --format=verilog mic1 -c mic1
 
 

@@ -1,6 +1,6 @@
 Analysis & Synthesis report for mic1
-Thu Jun 12 17:19:28 2025
-Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Mon Dec 01 08:54:28 2025
+Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
 ---------------------
@@ -13,9 +13,18 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Elapsed Time Per Partition
- 10. Analysis & Synthesis Messages
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis IP Cores Summary
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Source assignments for UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated
+ 15. Parameter Settings for User Entity Instance: UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component
+ 16. Parameter Settings for User Entity Instance: UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component
+ 17. altsyncram Parameter Settings by Entity Instance
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -41,18 +50,18 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jun 12 17:19:28 2025           ;
-; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Analysis & Synthesis Status        ; Successful - Mon Dec 01 08:54:28 2025           ;
+; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; mic1                                            ;
-; Top-level Entity Name              ; register_32bit                                  ;
-; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 97                                              ;
-;     Total combinational functions  ; 97                                              ;
-;     Dedicated logic registers      ; 32                                              ;
-; Total registers                    ; 32                                              ;
-; Total pins                         ; 166                                             ;
+; Top-level Entity Name              ; CPU                                             ;
+; Family                             ; Cyclone III                                     ;
+; Total logic elements               ; 305                                             ;
+;     Total combinational functions  ; 297                                             ;
+;     Dedicated logic registers      ; 49                                              ;
+; Total registers                    ; 49                                              ;
+; Total pins                         ; 224                                             ;
 ; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
+; Total memory bits                  ; 18,432                                          ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
 ; Total PLLs                         ; 0                                               ;
 +------------------------------------+-------------------------------------------------+
@@ -63,8 +72,8 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
-; Top-level entity name                                                      ; register_32bit     ; mic1               ;
-; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Top-level entity name                                                      ; CPU                ; mic1               ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
@@ -103,12 +112,14 @@ applicable agreement for further details.
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
 ; Auto ROM Replacement                                                       ; On                 ; On                 ;
 ; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
 ; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
 ; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
 ; Strict RAM Replacement                                                     ; Off                ; Off                ;
 ; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
 ; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
 ; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
@@ -116,7 +127,7 @@ applicable agreement for further details.
 ; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
 ; Report Parameter Settings                                                  ; On                 ; On                 ;
 ; Report Source Assignments                                                  ; On                 ; On                 ;
 ; Report Connectivity Checks                                                 ; On                 ; On                 ;
@@ -153,58 +164,540 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                    ;
-+----------------------------------+-----------------+------------------------------------+-------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                          ; Library ;
-+----------------------------------+-----------------+------------------------------------+-------------------------------------------------------+---------+
-; register_8bit.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Vinicius/ProjetoMic/register_8bit.bdf  ;         ;
-; register_32bit.bdf               ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Vinicius/ProjetoMic/register_32bit.bdf ;         ;
-+----------------------------------+-----------------+------------------------------------+-------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                        ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                                              ; Library ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------------------+---------+
+; microcode.mif                    ; yes             ; User Memory Initialization File    ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/microcode.mif          ;         ;
+; lpm_mux0.vhd                     ; yes             ; User Wizard-Generated File         ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/lpm_mux0.vhd           ;         ;
+; decoder_2x4.bdf                  ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/decoder_2x4.bdf        ;         ;
+; full_adder_1bit.bdf              ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/full_adder_1bit.bdf    ;         ;
+; ULA_1bit.bdf                     ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/ULA_1bit.bdf           ;         ;
+; ULA_8bit.bdf                     ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/ULA_8bit.bdf           ;         ;
+; ULA_32bit.bdf                    ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/ULA_32bit.bdf          ;         ;
+; shifter.bdf                      ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/shifter.bdf            ;         ;
+; register_8bit.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/register_8bit.bdf      ;         ;
+; register_32bit.bdf               ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/register_32bit.bdf     ;         ;
+; MPC_generator.bdf                ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/MPC_generator.bdf      ;         ;
+; Microprogam_Memory.vhd           ; yes             ; User Wizard-Generated File         ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/Microprogam_Memory.vhd ;         ;
+; UNIT_CONTROL.bdf                 ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/UNIT_CONTROL.bdf       ;         ;
+; DATA_PATH.bdf                    ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/DATA_PATH.bdf          ;         ;
+; MAR.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/MAR.bdf                ;         ;
+; MDR.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/MDR.bdf                ;         ;
+; OPC.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/OPC.bdf                ;         ;
+; CPP_initial_adress.bdf           ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/CPP_initial_adress.bdf ;         ;
+; CPP.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/CPP.bdf                ;         ;
+; H.bdf                            ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/H.bdf                  ;         ;
+; LV_initial_address.bdf           ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/LV_initial_address.bdf ;         ;
+; LV.bdf                           ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/LV.bdf                 ;         ;
+; mbr_extensor.bdf                 ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/mbr_extensor.bdf       ;         ;
+; MBR.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/MBR.bdf                ;         ;
+; PC.bdf                           ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/PC.bdf                 ;         ;
+; SP.bdf                           ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/SP.bdf                 ;         ;
+; TOS.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/TOS.bdf                ;         ;
+; BANK_REGS.bdf                    ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/BANK_REGS.bdf          ;         ;
+; CPU.bdf                          ; yes             ; User Block Diagram/Schematic File  ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/CPU.bdf                ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altsyncram.tdf                          ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_ram_block.inc                   ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.inc                             ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_decode.inc                          ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc                          ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/a_rdenreg.inc                           ;         ;
+; altrom.inc                       ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altrom.inc                              ;         ;
+; altram.inc                       ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altram.inc                              ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altdpram.inc                            ;         ;
+; db/altsyncram_ph91.tdf           ; yes             ; Auto-Generated Megafunction        ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/db/altsyncram_ph91.tdf ;         ;
+; lpm_mux.tdf                      ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.tdf                             ;         ;
+; muxlut.inc                       ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/muxlut.inc                              ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/bypassff.inc                            ;         ;
+; altshift.inc                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altshift.inc                            ;         ;
+; db/mux_g6e.tdf                   ; yes             ; Auto-Generated Megafunction        ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/db/mux_g6e.tdf         ;         ;
++----------------------------------+-----------------+------------------------------------+-------------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimated Total logic elements              ; 97    ;
-;                                             ;       ;
-; Total combinational functions               ; 97    ;
-; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 64    ;
-;     -- 3 input functions                    ; 32    ;
-;     -- <=2 input functions                  ; 1     ;
-;                                             ;       ;
-; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 97    ;
-;     -- arithmetic mode                      ; 0     ;
-;                                             ;       ;
-; Total registers                             ; 32    ;
-;     -- Dedicated logic registers            ; 32    ;
-;     -- I/O registers                        ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 166   ;
-; Embedded Multiplier 9-bit elements          ; 0     ;
-; Maximum fan-out node                        ; LOAD  ;
-; Maximum fan-out                             ; 96    ;
-; Total fan-out                               ; 578   ;
-; Average fan-out                             ; 1.96  ;
-+---------------------------------------------+-------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                                     ;
++---------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                                             ;
++---------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 305                                                                                                               ;
+;                                             ;                                                                                                                   ;
+; Total combinational functions               ; 297                                                                                                               ;
+; Logic element usage by number of LUT inputs ;                                                                                                                   ;
+;     -- 4 input functions                    ; 206                                                                                                               ;
+;     -- 3 input functions                    ; 57                                                                                                                ;
+;     -- <=2 input functions                  ; 34                                                                                                                ;
+;                                             ;                                                                                                                   ;
+; Logic elements by mode                      ;                                                                                                                   ;
+;     -- normal mode                          ; 297                                                                                                               ;
+;     -- arithmetic mode                      ; 0                                                                                                                 ;
+;                                             ;                                                                                                                   ;
+; Total registers                             ; 49                                                                                                                ;
+;     -- Dedicated logic registers            ; 49                                                                                                                ;
+;     -- I/O registers                        ; 0                                                                                                                 ;
+;                                             ;                                                                                                                   ;
+; I/O pins                                    ; 224                                                                                                               ;
+; Total memory bits                           ; 18432                                                                                                             ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                                                 ;
+; Maximum fan-out node                        ; UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated|q_a[17] ;
+; Maximum fan-out                             ; 101                                                                                                               ;
+; Total fan-out                               ; 1973                                                                                                              ;
+; Average fan-out                             ; 2.38                                                                                                              ;
++---------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                 ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
-; |register_32bit            ; 97 (1)            ; 32 (0)       ; 0           ; 0            ; 0       ; 0         ; 166  ; 0            ; |register_32bit                     ; work         ;
-;    |register_8bit:inst1|   ; 24 (24)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |register_32bit|register_8bit:inst1 ; work         ;
-;    |register_8bit:inst2|   ; 24 (24)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |register_32bit|register_8bit:inst2 ; work         ;
-;    |register_8bit:inst3|   ; 24 (24)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |register_32bit|register_8bit:inst3 ; work         ;
-;    |register_8bit:inst|    ; 24 (24)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |register_32bit|register_8bit:inst  ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                      ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                            ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
+; |CPU                                         ; 297 (0)           ; 49 (0)       ; 18432       ; 0            ; 0       ; 0         ; 224  ; 0            ; |CPU                                                                                                           ; work         ;
+;    |DATA_PATH:inst|                          ; 277 (0)           ; 39 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst                                                                                            ; work         ;
+;       |BANK_REGS:inst17|                     ; 59 (21)           ; 39 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17                                                                           ; work         ;
+;          |CPP:inst8|                         ; 1 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8                                                                 ; work         ;
+;             |register_32bit:inst3|           ; 1 (1)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3                                            ; work         ;
+;                |register_8bit:inst1|         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1                        ; work         ;
+;          |LV:inst7|                          ; 1 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|LV:inst7                                                                  ; work         ;
+;             |register_32bit:inst1|           ; 1 (1)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1                                             ; work         ;
+;                |register_8bit:inst|          ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst                          ; work         ;
+;          |MBR:inst3|                         ; 2 (0)             ; 3 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3                                                                 ; work         ;
+;             |register_32bit:inst1|           ; 1 (1)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1                                            ; work         ;
+;                |register_8bit:inst1|         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1                        ; work         ;
+;             |register_32bit:inst|            ; 1 (1)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst                                             ; work         ;
+;                |register_8bit:inst1|         ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1                         ; work         ;
+;          |MDR:inst1|                         ; 33 (0)            ; 33 (1)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1                                                                 ; work         ;
+;             |register_32bit:inst|            ; 33 (10)           ; 32 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1|register_32bit:inst                                             ; work         ;
+;                |register_8bit:inst1|         ; 8 (8)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1|register_32bit:inst|register_8bit:inst1                         ; work         ;
+;                |register_8bit:inst2|         ; 8 (8)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1|register_32bit:inst|register_8bit:inst2                         ; work         ;
+;                |register_8bit:inst3|         ; 7 (7)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1|register_32bit:inst|register_8bit:inst3                         ; work         ;
+;                |register_8bit:inst|          ; 0 (0)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1|register_32bit:inst|register_8bit:inst                          ; work         ;
+;          |SP:inst6|                          ; 1 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|SP:inst6                                                                  ; work         ;
+;             |register_32bit:inst1|           ; 1 (1)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1                                             ; work         ;
+;                |register_8bit:inst|          ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst                          ; work         ;
+;       |ULA_32bit:inst|                       ; 184 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst                                                                             ; work         ;
+;          |ULA_8bit:inst4|                    ; 40 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4                                                              ; work         ;
+;             |ULA_1bit:inst25|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst25                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst25|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst26|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst26                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst26|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst27|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst27                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst27|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst28|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst28                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst28|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst29|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst29                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst29|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst30|                ; 4 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst30                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst30|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst31|                ; 6 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst31                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst31|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst|                  ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst                                                ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst4|ULA_1bit:inst|full_adder_1bit:inst2                          ; work         ;
+;          |ULA_8bit:inst5|                    ; 50 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5                                                              ; work         ;
+;             |ULA_1bit:inst25|                ; 6 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst25                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst25|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst26|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst26                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst26|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst27|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst27                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst27|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst28|                ; 8 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst28                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst28|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst29|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst29                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst29|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst30|                ; 7 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst30                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst30|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst31|                ; 7 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst31                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst31|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst|                  ; 7 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst                                                ; work         ;
+;                |full_adder_1bit:inst2|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst5|ULA_1bit:inst|full_adder_1bit:inst2                          ; work         ;
+;          |ULA_8bit:inst6|                    ; 40 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6                                                              ; work         ;
+;             |ULA_1bit:inst25|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst25                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst25|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst26|                ; 4 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst26                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst26|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst27|                ; 6 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst27                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst27|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst28|                ; 6 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst28                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst28|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst29|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst29                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst29|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst30|                ; 4 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst30                                              ; work         ;
+;                |full_adder_1bit:inst2|       ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst30|full_adder_1bit:inst2                        ; work         ;
+;             |ULA_1bit:inst31|                ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst31                                              ; work         ;
+;             |ULA_1bit:inst|                  ; 7 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst                                                ; work         ;
+;                |full_adder_1bit:inst2|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst|full_adder_1bit:inst2                          ; work         ;
+;          |ULA_8bit:inst|                     ; 54 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst                                                               ; work         ;
+;             |ULA_1bit:inst25|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst25                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst25|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst26|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst26                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst26|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst27|                ; 6 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst27                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst27|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst28|                ; 9 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst28                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst28|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst29|                ; 5 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst29                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst29|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst30|                ; 9 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst30                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst30|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst31|                ; 8 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst31                                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst31|full_adder_1bit:inst2                         ; work         ;
+;             |ULA_1bit:inst|                  ; 7 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst                                                 ; work         ;
+;                |decoder_2x4:inst1|           ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst|decoder_2x4:inst1                               ; work         ;
+;                |full_adder_1bit:inst2|       ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst|ULA_1bit:inst|full_adder_1bit:inst2                           ; work         ;
+;       |shifter:inst20|                       ; 34 (34)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|DATA_PATH:inst|shifter:inst20                                                                             ; work         ;
+;    |UNIT_CONTROL:inst1|                      ; 20 (0)            ; 10 (1)       ; 18432       ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1                                                                                        ; work         ;
+;       |MPC_generator:inst1|                  ; 20 (12)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|MPC_generator:inst1                                                                    ; work         ;
+;          |lpm_mux0:inst9|                    ; 8 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9                                                     ; work         ;
+;             |lpm_mux:LPM_MUX_component|      ; 8 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component                           ; work         ;
+;                |mux_g6e:auto_generated|      ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated    ; work         ;
+;       |Microprogam_Memory:inst|              ; 0 (0)             ; 0 (0)        ; 18432       ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|Microprogam_Memory:inst                                                                ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 18432       ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component                                ; work         ;
+;             |altsyncram_ph91:auto_generated| ; 0 (0)             ; 0 (0)        ; 18432       ; 0            ; 0       ; 0         ; 0    ; 0            ; |CPU|UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated ; work         ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                       ;
++----------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+-------+---------------+
+; Name                                                                                                                 ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF           ;
++----------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+-------+---------------+
+; UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 512          ; 36           ; --           ; --           ; 18432 ; microcode.mif ;
++----------------------------------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+-------+---------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                                                                                  ;
++--------+--------------+---------+--------------+--------------+------------------------------------------------------------+-------------------------------------------------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                                            ; IP Include File                                                                           ;
++--------+--------------+---------+--------------+--------------+------------------------------------------------------------+-------------------------------------------------------------------------------------------+
+; Altera ; ROM: 1-PORT  ; 13.0    ; N/A          ; N/A          ; |CPU|UNIT_CONTROL:inst1|Microprogam_Memory:inst            ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/Microprogam_Memory.vhd ;
+; Altera ; LPM_MUX      ; N/A     ; N/A          ; N/A          ; |CPU|UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9 ; C:/Users/Aluno/Downloads/Projeto-Mic-1-main (2)/Projeto-Mic-1-main/lpm_mux0.vhd           ;
++--------+--------------+---------+--------------+--------------+------------------------------------------------------------+-------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                                                ;
++-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
+; Register name                                                                             ; Reason for Removal                                                                                    ;
++-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst3|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst2|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst1|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10|register_32bit:inst|register_8bit:inst|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst3|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst2|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst1|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9|register_32bit:inst1|register_8bit:inst|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst3|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst24 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst2|inst28 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst1  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst2  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst12 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst16 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst20 ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst3|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst2|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst1|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst3|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst2|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst1|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst3|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst2|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst1   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst2   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst12  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst16  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst20  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst24  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst1|inst28  ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|register_8bit:inst|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst3|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst2|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst1|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst      ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst1     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst2     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst12    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst16    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst20    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst24    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|register_8bit:inst|inst28    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst3|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst2|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst1    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst2    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst12   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst16   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst20   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst24   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst1|inst28   ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst      ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst1     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst2     ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst12    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst16    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst20    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst24    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst|inst28    ; Stuck at GND due to stuck port data_in                                                                ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst28 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst1   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst12  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ;
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst|inst2   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst1  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst12 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst16 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst2  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst20 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst24 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst28 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst1  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst12 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst16 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst2  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst20 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst24 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst2|inst28 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst1  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst12 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst16 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst2  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst20 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst24 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst3|inst28 ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst1   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst12  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst16  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst2   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst20  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst24  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst|inst28  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|register_8bit:inst1|inst   ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst1   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst12  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst16  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst2   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst20  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst24  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst28  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst1   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst12  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst16  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst2   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst20  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst24  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst2|inst28  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst1   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst12  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst16  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst2   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst20  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst24  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst3|inst28  ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst     ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst1    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst12   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst16   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst2    ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst20   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst24   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst|inst28   ; Merged with DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst|register_8bit:inst1|inst    ;
+; Total Number of Removed Registers = 315                                                   ;                                                                                                       ;
++-------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -212,14 +705,145 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 32    ;
+; Total registers                              ; 49    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 32    ;
+; Number of registers using Synchronous Load   ; 23    ;
+; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                        ;
++-------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                         ; Fan out ;
++-------------------------------------------------------------------------------------------+---------+
+; DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|register_32bit:inst3|register_8bit:inst1|inst24 ; 6       ;
+; DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|register_32bit:inst1|register_8bit:inst|inst1    ; 1       ;
+; DATA_PATH:inst|BANK_REGS:inst17|LV:inst7|register_32bit:inst1|register_8bit:inst|inst1    ; 1       ;
+; Total number of inverted registers = 3                                                    ;         ;
++-------------------------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; 9:1                ; 26 bits   ; 156 LEs       ; 52 LEs               ; 104 LEs                ; No         ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|OUT_B[31] ;
+; 9:1                ; 5 bits    ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; No         ; |CPU|DATA_PATH:inst|BANK_REGS:inst17|OUT_B[9]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                 ;
++---------------------------------+--------------------+------+--------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                  ;
++---------------------------------+--------------------+------+--------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-------------------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                                        ;
++------------------------------------+----------------------+-------------------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                                     ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                                  ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                                ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                                ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                              ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                                     ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                                     ;
+; WIDTH_A                            ; 36                   ; Signed Integer                                              ;
+; WIDTHAD_A                          ; 9                    ; Signed Integer                                              ;
+; NUMWORDS_A                         ; 512                  ; Signed Integer                                              ;
+; OUTDATA_REG_A                      ; CLOCK0               ; Untyped                                                     ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                                     ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                                     ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                                     ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                                     ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                                     ;
+; WIDTH_B                            ; 1                    ; Untyped                                                     ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                                     ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                                     ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                                     ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                                     ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                                     ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                                     ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                                     ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                                     ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                                     ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                                     ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                                     ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                                     ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                                     ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                                     ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                              ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                                     ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                                     ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                                     ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                                     ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                                     ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                                     ;
+; INIT_FILE                          ; microcode.mif        ; Untyped                                                     ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                                     ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                                     ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                                     ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                                     ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                                     ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                                     ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                                     ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                                     ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                                     ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                                     ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                                     ;
+; DEVICE_FAMILY                      ; Cyclone III          ; Untyped                                                     ;
+; CBXI_PARAMETER                     ; altsyncram_ph91      ; Untyped                                                     ;
++------------------------------------+----------------------+-------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component ;
++------------------------+-------------+---------------------------------------------------------------------------------------+
+; Parameter Name         ; Value       ; Type                                                                                  ;
++------------------------+-------------+---------------------------------------------------------------------------------------+
+; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                                                            ;
+; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                                                          ;
+; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                                                          ;
+; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                                                        ;
+; LPM_WIDTH              ; 8           ; Signed Integer                                                                        ;
+; LPM_SIZE               ; 2           ; Signed Integer                                                                        ;
+; LPM_WIDTHS             ; 1           ; Signed Integer                                                                        ;
+; LPM_PIPELINE           ; 0           ; Signed Integer                                                                        ;
+; CBXI_PARAMETER         ; mux_g6e     ; Untyped                                                                               ;
+; DEVICE_FAMILY          ; Cyclone III ; Untyped                                                                               ;
++------------------------+-------------+---------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                                       ;
++-------------------------------------------+----------------------------------------------------------------------------+
+; Name                                      ; Value                                                                      ;
++-------------------------------------------+----------------------------------------------------------------------------+
+; Number of entity instances                ; 1                                                                          ;
+; Entity Instance                           ; UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                                                        ;
+;     -- WIDTH_A                            ; 36                                                                         ;
+;     -- NUMWORDS_A                         ; 512                                                                        ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                                     ;
+;     -- WIDTH_B                            ; 1                                                                          ;
+;     -- NUMWORDS_B                         ; 1                                                                          ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                                     ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                               ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                                       ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                                  ;
++-------------------------------------------+----------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -235,11 +859,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 64-Bit Analysis & Synthesis
+Info: Running Quartus II 32-bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Jun 12 17:19:23 2025
+    Info: Processing started: Mon Dec 01 08:54:23 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off mic1 -c mic1
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file lpm_mux0.vhd
+    Info (12022): Found design unit 1: lpm_mux0-SYN
+    Info (12023): Found entity 1: lpm_mux0
 Info (12021): Found 1 design units, including 1 entities, in source file decoder_2x4.bdf
     Info (12023): Found entity 1: decoder_2x4
 Info (12021): Found 1 design units, including 1 entities, in source file full_adder_1bit.bdf
@@ -260,51 +887,344 @@ Info (12021): Found 1 design units, including 1 entities, in source file sra1.bd
     Info (12023): Found entity 1: sra1
 Info (12021): Found 1 design units, including 1 entities, in source file sll8.bdf
     Info (12023): Found entity 1: sll8
-Info (12127): Elaborating entity "register_32bit" for the top level hierarchy
-Info (12128): Elaborating entity "register_8bit" for hierarchy "register_8bit:inst"
-Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
-    Warning (13310): Register "register_8bit:inst3|inst" is converted into an equivalent circuit using register "register_8bit:inst3|inst~_emulated" and latch "register_8bit:inst3|inst~1"
-    Warning (13310): Register "register_8bit:inst3|inst1" is converted into an equivalent circuit using register "register_8bit:inst3|inst1~_emulated" and latch "register_8bit:inst3|inst1~1"
-    Warning (13310): Register "register_8bit:inst3|inst2" is converted into an equivalent circuit using register "register_8bit:inst3|inst2~_emulated" and latch "register_8bit:inst3|inst2~1"
-    Warning (13310): Register "register_8bit:inst3|inst12" is converted into an equivalent circuit using register "register_8bit:inst3|inst12~_emulated" and latch "register_8bit:inst3|inst12~1"
-    Warning (13310): Register "register_8bit:inst3|inst16" is converted into an equivalent circuit using register "register_8bit:inst3|inst16~_emulated" and latch "register_8bit:inst3|inst16~1"
-    Warning (13310): Register "register_8bit:inst3|inst20" is converted into an equivalent circuit using register "register_8bit:inst3|inst20~_emulated" and latch "register_8bit:inst3|inst20~1"
-    Warning (13310): Register "register_8bit:inst3|inst24" is converted into an equivalent circuit using register "register_8bit:inst3|inst24~_emulated" and latch "register_8bit:inst3|inst24~1"
-    Warning (13310): Register "register_8bit:inst3|inst28" is converted into an equivalent circuit using register "register_8bit:inst3|inst28~_emulated" and latch "register_8bit:inst3|inst28~1"
-    Warning (13310): Register "register_8bit:inst2|inst" is converted into an equivalent circuit using register "register_8bit:inst2|inst~_emulated" and latch "register_8bit:inst2|inst~1"
-    Warning (13310): Register "register_8bit:inst2|inst1" is converted into an equivalent circuit using register "register_8bit:inst2|inst1~_emulated" and latch "register_8bit:inst2|inst1~1"
-    Warning (13310): Register "register_8bit:inst2|inst2" is converted into an equivalent circuit using register "register_8bit:inst2|inst2~_emulated" and latch "register_8bit:inst2|inst2~1"
-    Warning (13310): Register "register_8bit:inst2|inst12" is converted into an equivalent circuit using register "register_8bit:inst2|inst12~_emulated" and latch "register_8bit:inst2|inst12~1"
-    Warning (13310): Register "register_8bit:inst2|inst16" is converted into an equivalent circuit using register "register_8bit:inst2|inst16~_emulated" and latch "register_8bit:inst2|inst16~1"
-    Warning (13310): Register "register_8bit:inst2|inst20" is converted into an equivalent circuit using register "register_8bit:inst2|inst20~_emulated" and latch "register_8bit:inst2|inst20~1"
-    Warning (13310): Register "register_8bit:inst2|inst24" is converted into an equivalent circuit using register "register_8bit:inst2|inst24~_emulated" and latch "register_8bit:inst2|inst24~1"
-    Warning (13310): Register "register_8bit:inst2|inst28" is converted into an equivalent circuit using register "register_8bit:inst2|inst28~_emulated" and latch "register_8bit:inst2|inst28~1"
-    Warning (13310): Register "register_8bit:inst1|inst" is converted into an equivalent circuit using register "register_8bit:inst1|inst~_emulated" and latch "register_8bit:inst1|inst~1"
-    Warning (13310): Register "register_8bit:inst1|inst1" is converted into an equivalent circuit using register "register_8bit:inst1|inst1~_emulated" and latch "register_8bit:inst1|inst1~1"
-    Warning (13310): Register "register_8bit:inst1|inst2" is converted into an equivalent circuit using register "register_8bit:inst1|inst2~_emulated" and latch "register_8bit:inst1|inst2~1"
-    Warning (13310): Register "register_8bit:inst1|inst12" is converted into an equivalent circuit using register "register_8bit:inst1|inst12~_emulated" and latch "register_8bit:inst1|inst12~1"
-    Warning (13310): Register "register_8bit:inst1|inst16" is converted into an equivalent circuit using register "register_8bit:inst1|inst16~_emulated" and latch "register_8bit:inst1|inst16~1"
-    Warning (13310): Register "register_8bit:inst1|inst20" is converted into an equivalent circuit using register "register_8bit:inst1|inst20~_emulated" and latch "register_8bit:inst1|inst20~1"
-    Warning (13310): Register "register_8bit:inst1|inst24" is converted into an equivalent circuit using register "register_8bit:inst1|inst24~_emulated" and latch "register_8bit:inst1|inst24~1"
-    Warning (13310): Register "register_8bit:inst1|inst28" is converted into an equivalent circuit using register "register_8bit:inst1|inst28~_emulated" and latch "register_8bit:inst1|inst28~1"
-    Warning (13310): Register "register_8bit:inst|inst" is converted into an equivalent circuit using register "register_8bit:inst|inst~_emulated" and latch "register_8bit:inst|inst~1"
-    Warning (13310): Register "register_8bit:inst|inst1" is converted into an equivalent circuit using register "register_8bit:inst|inst1~_emulated" and latch "register_8bit:inst|inst1~1"
-    Warning (13310): Register "register_8bit:inst|inst2" is converted into an equivalent circuit using register "register_8bit:inst|inst2~_emulated" and latch "register_8bit:inst|inst2~1"
-    Warning (13310): Register "register_8bit:inst|inst12" is converted into an equivalent circuit using register "register_8bit:inst|inst12~_emulated" and latch "register_8bit:inst|inst12~1"
-    Warning (13310): Register "register_8bit:inst|inst16" is converted into an equivalent circuit using register "register_8bit:inst|inst16~_emulated" and latch "register_8bit:inst|inst16~1"
-    Warning (13310): Register "register_8bit:inst|inst20" is converted into an equivalent circuit using register "register_8bit:inst|inst20~_emulated" and latch "register_8bit:inst|inst20~1"
-    Warning (13310): Register "register_8bit:inst|inst24" is converted into an equivalent circuit using register "register_8bit:inst|inst24~_emulated" and latch "register_8bit:inst|inst24~1"
-    Warning (13310): Register "register_8bit:inst|inst28" is converted into an equivalent circuit using register "register_8bit:inst|inst28~_emulated" and latch "register_8bit:inst|inst28~1"
+Info (12021): Found 1 design units, including 1 entities, in source file control_unit.bdf
+    Info (12023): Found entity 1: control_unit
+Info (12021): Found 1 design units, including 1 entities, in source file mpc_generator.bdf
+    Info (12023): Found entity 1: MPC_generator
+Info (12021): Found 2 design units, including 1 entities, in source file microprogam_memory.vhd
+    Info (12022): Found design unit 1: microprogam_memory-SYN
+    Info (12023): Found entity 1: Microprogam_Memory
+Info (12021): Found 1 design units, including 1 entities, in source file unit_control.bdf
+    Info (12023): Found entity 1: UNIT_CONTROL
+Info (12021): Found 1 design units, including 1 entities, in source file data_path.bdf
+    Info (12023): Found entity 1: DATA_PATH
+Info (12021): Found 1 design units, including 1 entities, in source file mar.bdf
+    Info (12023): Found entity 1: MAR
+Info (12021): Found 1 design units, including 1 entities, in source file mdr.bdf
+    Info (12023): Found entity 1: MDR
+Info (12021): Found 1 design units, including 1 entities, in source file opc.bdf
+    Info (12023): Found entity 1: OPC
+Info (12021): Found 1 design units, including 1 entities, in source file cpp_initial_adress.bdf
+    Info (12023): Found entity 1: CPP_initial_adress
+Info (12021): Found 1 design units, including 1 entities, in source file cpp.bdf
+    Info (12023): Found entity 1: CPP
+Info (12021): Found 1 design units, including 1 entities, in source file h.bdf
+    Info (12023): Found entity 1: H
+Info (12021): Found 1 design units, including 1 entities, in source file lv_initial_address.bdf
+    Info (12023): Found entity 1: LV_initial_address
+Info (12021): Found 1 design units, including 1 entities, in source file lv.bdf
+    Info (12023): Found entity 1: LV
+Info (12021): Found 1 design units, including 1 entities, in source file mbr_extensor.bdf
+    Info (12023): Found entity 1: mbr_extensor
+Info (12021): Found 1 design units, including 1 entities, in source file mbr.bdf
+    Info (12023): Found entity 1: MBR
+Info (12021): Found 1 design units, including 1 entities, in source file pc_init.bdf
+    Info (12023): Found entity 1: pc_init
+Info (12021): Found 1 design units, including 1 entities, in source file pc.bdf
+    Info (12023): Found entity 1: PC
+Info (12021): Found 1 design units, including 1 entities, in source file sp.bdf
+    Info (12023): Found entity 1: SP
+Info (12021): Found 1 design units, including 1 entities, in source file tos.bdf
+    Info (12023): Found entity 1: TOS
+Info (12021): Found 1 design units, including 1 entities, in source file bank_regs.bdf
+    Info (12023): Found entity 1: BANK_REGS
+Info (12021): Found 1 design units, including 1 entities, in source file cpu.bdf
+    Info (12023): Found entity 1: CPU
+Info (12127): Elaborating entity "CPU" for the top level hierarchy
+Info (12128): Elaborating entity "UNIT_CONTROL" for hierarchy "UNIT_CONTROL:inst1"
+Info (12128): Elaborating entity "Microprogam_Memory" for hierarchy "UNIT_CONTROL:inst1|Microprogam_Memory:inst"
+Info (12128): Elaborating entity "altsyncram" for hierarchy "UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component"
+Info (12130): Elaborated megafunction instantiation "UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component"
+Info (12133): Instantiated megafunction "UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component" with the following parameter:
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "microcode.mif"
+    Info (12134): Parameter "intended_device_family" = "Cyclone III"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "512"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "CLOCK0"
+    Info (12134): Parameter "widthad_a" = "9"
+    Info (12134): Parameter "width_a" = "36"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ph91.tdf
+    Info (12023): Found entity 1: altsyncram_ph91
+Info (12128): Elaborating entity "altsyncram_ph91" for hierarchy "UNIT_CONTROL:inst1|Microprogam_Memory:inst|altsyncram:altsyncram_component|altsyncram_ph91:auto_generated"
+Info (12128): Elaborating entity "MPC_generator" for hierarchy "UNIT_CONTROL:inst1|MPC_generator:inst1"
+Info (12128): Elaborating entity "lpm_mux0" for hierarchy "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9"
+Info (12128): Elaborating entity "LPM_MUX" for hierarchy "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component"
+Info (12130): Elaborated megafunction instantiation "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component"
+Info (12133): Instantiated megafunction "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTH" = "8"
+    Info (12134): Parameter "LPM_SIZE" = "2"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_PIPELINE" = "0"
+    Info (12134): Parameter "LPM_TYPE" = "LPM_MUX"
+    Info (12134): Parameter "LPM_HINT" = "UNUSED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_g6e.tdf
+    Info (12023): Found entity 1: mux_g6e
+Info (12128): Elaborating entity "mux_g6e" for hierarchy "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|LPM_MUX:LPM_MUX_component|mux_g6e:auto_generated"
+Info (12128): Elaborating entity "DATA_PATH" for hierarchy "DATA_PATH:inst"
+Info (12128): Elaborating entity "shifter" for hierarchy "DATA_PATH:inst|shifter:inst20"
+Info (12128): Elaborating entity "decoder_2x4" for hierarchy "DATA_PATH:inst|shifter:inst20|decoder_2x4:inst"
+Info (12128): Elaborating entity "ULA_32bit" for hierarchy "DATA_PATH:inst|ULA_32bit:inst"
+Info (12128): Elaborating entity "ULA_8bit" for hierarchy "DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6"
+Info (12128): Elaborating entity "ULA_1bit" for hierarchy "DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst31"
+Info (12128): Elaborating entity "full_adder_1bit" for hierarchy "DATA_PATH:inst|ULA_32bit:inst|ULA_8bit:inst6|ULA_1bit:inst31|full_adder_1bit:inst2"
+Info (12128): Elaborating entity "BANK_REGS" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17"
+Info (12128): Elaborating entity "MAR" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst"
+Info (12128): Elaborating entity "register_32bit" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst"
+Info (12128): Elaborating entity "register_8bit" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|register_8bit:inst"
+Info (12128): Elaborating entity "H" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|H:inst11"
+Info (12128): Elaborating entity "MDR" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MDR:inst1"
+Info (12128): Elaborating entity "PC" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2"
+Info (12128): Elaborating entity "MBR" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3"
+Info (12128): Elaborating entity "mbr_extensor" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|mbr_extensor:inst2"
+Info (12128): Elaborating entity "SP" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|SP:inst6"
+Info (12128): Elaborating entity "LV_initial_address" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|SP:inst6|LV_initial_address:inst2"
+Info (12128): Elaborating entity "LV" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|LV:inst7"
+Info (12128): Elaborating entity "CPP" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8"
+Info (12128): Elaborating entity "CPP_initial_adress" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|CPP:inst8|CPP_initial_adress:inst"
+Info (12128): Elaborating entity "TOS" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|TOS:inst9"
+Info (12128): Elaborating entity "OPC" for hierarchy "DATA_PATH:inst|BANK_REGS:inst17|OPC:inst10"
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[31]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[30]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[29]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[28]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[27]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[26]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[25]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[24]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[23]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[22]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[21]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[20]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[19]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[18]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[17]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[16]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[15]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[14]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[13]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[12]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[11]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[10]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[9]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[8]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[7]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[6]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[5]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[4]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[3]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[2]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[1]" into a selector
+    Warning (13048): Converted tri-state node "DATA_PATH:inst|BANK_REGS:inst17|OUT_B[0]" into a selector
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[31]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[30]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[29]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[28]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[27]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[26]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[25]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[24]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[23]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[22]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[21]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[20]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[19]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[18]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[17]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[16]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[15]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[14]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[13]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[12]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[11]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[10]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[9]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[8]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[7]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[6]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[5]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[4]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[3]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[2]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[1]" feeding internal logic into a wire
+    Warning (13049): Converted tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|H:inst11|register_32bit:inst|inst9[0]" feeding internal logic into a wire
+Warning (13044): Always-enabled tri-state buffer(s) removed
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[7]" to the node "MBR_OUT[7]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[6]" to the node "MBR_OUT[6]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[5]" to the node "MBR_OUT[5]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[4]" to the node "MBR_OUT[4]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[3]" to the node "MBR_OUT[3]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[2]" to the node "MBR_OUT[2]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[1]" to the node "MBR_OUT[1]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[0]" to the node "MBR_OUT[0]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[7]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[7]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[6]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[6]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[5]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[5]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[4]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[4]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[3]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[3]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[2]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[2]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[1]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[1]" into a wire
+    Warning (13045): Converted the fanout from the always-enabled tri-state buffer "DATA_PATH:inst|BANK_REGS:inst17|MBR:inst3|register_32bit:inst1|inst10[0]" to the node "UNIT_CONTROL:inst1|MPC_generator:inst1|lpm_mux0:inst9|lpm_mux:LPM_MUX_component|mux_g6e:auto_generated|result_node[0]" into a wire
+Warning (13030): Reduced the following open-drain buffers that are fed by GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[31]" to the output pin "DATA_MEM_ADDR[31]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[30]" to the output pin "DATA_MEM_ADDR[30]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[29]" to the output pin "DATA_MEM_ADDR[29]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[28]" to the output pin "DATA_MEM_ADDR[28]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[27]" to the output pin "DATA_MEM_ADDR[27]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[26]" to the output pin "DATA_MEM_ADDR[26]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[25]" to the output pin "DATA_MEM_ADDR[25]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[24]" to the output pin "DATA_MEM_ADDR[24]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[23]" to the output pin "DATA_MEM_ADDR[23]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[22]" to the output pin "DATA_MEM_ADDR[22]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[21]" to the output pin "DATA_MEM_ADDR[21]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[20]" to the output pin "DATA_MEM_ADDR[20]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[19]" to the output pin "DATA_MEM_ADDR[19]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[18]" to the output pin "DATA_MEM_ADDR[18]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[17]" to the output pin "DATA_MEM_ADDR[17]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[16]" to the output pin "DATA_MEM_ADDR[16]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[15]" to the output pin "DATA_MEM_ADDR[15]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[14]" to the output pin "DATA_MEM_ADDR[14]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[13]" to the output pin "DATA_MEM_ADDR[13]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[12]" to the output pin "DATA_MEM_ADDR[12]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[11]" to the output pin "DATA_MEM_ADDR[11]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[10]" to the output pin "DATA_MEM_ADDR[10]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[9]" to the output pin "DATA_MEM_ADDR[9]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[8]" to the output pin "DATA_MEM_ADDR[8]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[7]" to the output pin "DATA_MEM_ADDR[7]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[6]" to the output pin "DATA_MEM_ADDR[6]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[5]" to the output pin "DATA_MEM_ADDR[5]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[4]" to the output pin "DATA_MEM_ADDR[4]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[3]" to the output pin "DATA_MEM_ADDR[3]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[2]" to the output pin "DATA_MEM_ADDR[2]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[1]" to the output pin "DATA_MEM_ADDR[1]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|MAR:inst|register_32bit:inst|inst10[0]" to the output pin "DATA_MEM_ADDR[0]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[31]" to the output pin "PC[31]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[30]" to the output pin "PC[30]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[29]" to the output pin "PC[29]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[28]" to the output pin "PC[28]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[27]" to the output pin "PC[27]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[26]" to the output pin "PC[26]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[25]" to the output pin "PC[25]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[24]" to the output pin "PC[24]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[23]" to the output pin "PC[23]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[22]" to the output pin "PC[22]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[21]" to the output pin "PC[21]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[20]" to the output pin "PC[20]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[19]" to the output pin "PC[19]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[18]" to the output pin "PC[18]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[17]" to the output pin "PC[17]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[16]" to the output pin "PC[16]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[15]" to the output pin "PC[15]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[14]" to the output pin "PC[14]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[13]" to the output pin "PC[13]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[12]" to the output pin "PC[12]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[11]" to the output pin "PC[11]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[10]" to the output pin "PC[10]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[9]" to the output pin "PC[9]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[8]" to the output pin "PC[8]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[7]" to the output pin "PC[7]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[6]" to the output pin "PC[6]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[5]" to the output pin "PC[5]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[4]" to the output pin "PC[4]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[3]" to the output pin "PC[3]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[2]" to the output pin "PC[2]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[1]" to the output pin "PC[1]" to GND
+    Warning (13031): Reduced fanout from the always-enabled open-drain buffer "DATA_PATH:inst|BANK_REGS:inst17|PC:inst2|register_32bit:inst1|inst10[0]" to the output pin "PC[0]" to GND
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "DATA_MEM_ADDR[31]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[30]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[29]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[28]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[27]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[26]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[25]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[24]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[23]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[22]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[21]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[20]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[19]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[18]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[17]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[16]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[15]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[14]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[13]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[12]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[11]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[10]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[9]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[8]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[7]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[6]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[5]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[4]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[3]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[2]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[1]" is stuck at GND
+    Warning (13410): Pin "DATA_MEM_ADDR[0]" is stuck at GND
+    Warning (13410): Pin "PC[31]" is stuck at GND
+    Warning (13410): Pin "PC[30]" is stuck at GND
+    Warning (13410): Pin "PC[29]" is stuck at GND
+    Warning (13410): Pin "PC[28]" is stuck at GND
+    Warning (13410): Pin "PC[27]" is stuck at GND
+    Warning (13410): Pin "PC[26]" is stuck at GND
+    Warning (13410): Pin "PC[25]" is stuck at GND
+    Warning (13410): Pin "PC[24]" is stuck at GND
+    Warning (13410): Pin "PC[23]" is stuck at GND
+    Warning (13410): Pin "PC[22]" is stuck at GND
+    Warning (13410): Pin "PC[21]" is stuck at GND
+    Warning (13410): Pin "PC[20]" is stuck at GND
+    Warning (13410): Pin "PC[19]" is stuck at GND
+    Warning (13410): Pin "PC[18]" is stuck at GND
+    Warning (13410): Pin "PC[17]" is stuck at GND
+    Warning (13410): Pin "PC[16]" is stuck at GND
+    Warning (13410): Pin "PC[15]" is stuck at GND
+    Warning (13410): Pin "PC[14]" is stuck at GND
+    Warning (13410): Pin "PC[13]" is stuck at GND
+    Warning (13410): Pin "PC[12]" is stuck at GND
+    Warning (13410): Pin "PC[11]" is stuck at GND
+    Warning (13410): Pin "PC[10]" is stuck at GND
+    Warning (13410): Pin "PC[9]" is stuck at GND
+    Warning (13410): Pin "PC[8]" is stuck at GND
+    Warning (13410): Pin "PC[7]" is stuck at GND
+    Warning (13410): Pin "PC[6]" is stuck at GND
+    Warning (13410): Pin "PC[5]" is stuck at GND
+    Warning (13410): Pin "PC[4]" is stuck at GND
+    Warning (13410): Pin "PC[3]" is stuck at GND
+    Warning (13410): Pin "PC[2]" is stuck at GND
+    Warning (13410): Pin "PC[1]" is stuck at GND
+    Warning (13410): Pin "PC[0]" is stuck at GND
+Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 263 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 102 input pins
-    Info (21059): Implemented 64 output pins
-    Info (21061): Implemented 97 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 34 warnings
-    Info: Peak virtual memory: 4577 megabytes
-    Info: Processing ended: Thu Jun 12 17:19:28 2025
+Warning (21074): Design contains 8 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[7]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[6]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[5]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[4]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[3]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[2]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[1]"
+    Warning (15610): No output dependent on input pin "PROG_MEM_IN[0]"
+Info (21057): Implemented 588 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 42 input pins
+    Info (21059): Implemented 182 output pins
+    Info (21061): Implemented 328 logic cells
+    Info (21064): Implemented 36 RAM segments
+Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 222 warnings
+    Info: Peak virtual memory: 398 megabytes
+    Info: Processing ended: Mon Dec 01 08:54:28 2025
     Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Total CPU time (on all processors): 00:00:04
 
 
